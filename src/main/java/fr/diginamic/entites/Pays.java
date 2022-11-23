@@ -7,15 +7,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * @author antPinot
  *
  */
+
+@Entity
+@Table
 public class Pays {
 	
 	@Id
@@ -48,6 +53,14 @@ public class Pays {
 		this.nom = nom;
 	}
 
+	/**Constructeur
+	 * @param nom
+	 * @param url
+	 */
+	public Pays(String nom, String url) {
+		this.nom = nom;
+		this.url = url;
+	}
 
 
 	/**Getter pour l'attribut id
@@ -119,5 +132,12 @@ public class Pays {
 	public void setLieux(Set<Lieu> lieux) {
 		this.lieux = lieux;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Pays [id=" + id + ", nom=" + nom + ", url=" + url + ", films=" + films + ", lieux=" + lieux + "]";
+	}
+	
 	
 }

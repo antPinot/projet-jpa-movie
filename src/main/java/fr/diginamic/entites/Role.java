@@ -7,15 +7,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 /**
  * @author antPinot
  *
  */
+
+@Entity
+@Table
 public class Role {
 	
 	@Id
@@ -24,6 +29,12 @@ public class Role {
 	
 	@Column(name = "CHARACTER_NAME")
 	private String characterName;
+	
+	@Column(name = "URL")
+	private String url;
+	
+	@Column(name = "HEIGHT")
+	private String height;
 	
 	@ManyToMany(mappedBy = "roles")
 	private Set<Film> films = new HashSet<Film>();
@@ -35,6 +46,17 @@ public class Role {
 	 * 
 	 */
 	public Role() {
+	}
+
+	/**Constructeur
+	 * @param characterName
+	 * @param url
+	 * @param height
+	 */
+	public Role(String characterName, String url, String height) {
+		this.characterName = characterName;
+		this.url = url;
+		this.height = height;
 	}
 
 	/**Getter pour l'attribut id
@@ -92,5 +114,41 @@ public class Role {
 	public void setActeurs(Set<Acteur> acteurs) {
 		this.acteurs = acteurs;
 	}
+	
+	
 
+	/**Getter pour l'attribut url
+	 * @return the url
+	 */
+	public String getUrl() {
+		return url;
+	}
+
+	/**Setter pour l'attribut url
+	 * @param url the url to set
+	 */
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	/**Getter pour l'attribut height
+	 * @return the height
+	 */
+	public String getHeight() {
+		return height;
+	}
+
+	/**Setter pour l'attribut height
+	 * @param height the height to set
+	 */
+	public void setHeight(String height) {
+		this.height = height;
+	}
+
+	@Override
+	public String toString() {
+		return "Role [id=" + id + ", characterName=" + characterName + ", url=" + url + ", height=" + height
+				+ ", films=" + films + ", acteurs=" + acteurs + "]";
+	}
+	
 }

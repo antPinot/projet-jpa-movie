@@ -12,6 +12,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+
+
 /**
  * @author antPinot
  *
@@ -24,13 +26,13 @@ public abstract class Personne {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	protected Integer id;
 	
 	@Column(name = "IDENTITE")
-	private String identite;
+	protected String identite;
 	
 	@Column(name = "URL")
-	private String url;
+	protected String url;
 
 	public Personne() {
 	}
@@ -43,6 +45,56 @@ public abstract class Personne {
 		this.identite = identite;
 		this.url = url;
 	}
+	
+	
+
+	/**Getter pour l'attribut id
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**Setter pour l'attribut id
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**Getter pour l'attribut identite
+	 * @return the identite
+	 */
+	public String getIdentite() {
+		return identite;
+	}
+
+	/**Setter pour l'attribut identite
+	 * @param identite the identite to set
+	 */
+	public void setIdentite(String identite) {
+		this.identite = identite;
+	}
+
+	/**Getter pour l'attribut url
+	 * @return the url
+	 */
+	public String getUrl() {
+		return url;
+	}
+
+	/**Setter pour l'attribut url
+	 * @param url the url to set
+	 */
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	@Override
+	public String toString() {
+		return "Personne [id=" + id + ", identite=" + identite + ", url=" + url + "]";
+	}
+	
 	
 
 }

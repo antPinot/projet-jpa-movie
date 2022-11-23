@@ -1,4 +1,4 @@
-package fr.diginamic.utils;
+package fr.diginamic.dto;
 
 import java.time.Year;
 import java.util.HashSet;
@@ -16,9 +16,10 @@ import fr.diginamic.entites.Lieu;
 import fr.diginamic.entites.Pays;
 import fr.diginamic.entites.Realisateur;
 import fr.diginamic.entites.Role;
+import fr.diginamic.utils.YearDeserializer;
 
 public class FilmDto {
-	
+
 	@JsonProperty("id")
 	private String idImdb;
 
@@ -33,29 +34,39 @@ public class FilmDto {
 	@JsonDeserialize(using = YearDeserializer.class)
 	private Year anneeSortie;
 
-	private Pays pays;
+	private PaysDto pays;
 
 	@JsonInclude(Include.NON_NULL)
-	private Lieu lieuTournage;
-	
-	private Set<Genre> genres = new HashSet<Genre>();
-	
-	private Set<Role> roles = new HashSet<Role>();
-	
-	@JsonProperty("castingPrincipal")
-	private Set<Acteur> acteurs = new HashSet<Acteur>();
-	
-	private Set<Realisateur> realisateurs = new HashSet<Realisateur>();
-	
-	
+	private LieuDto lieuTournage;
 
-	/**Constructeur
+	private Set<GenreDto> genres = new HashSet<GenreDto>();
+
+	private Set<RoleDto> roles = new HashSet<RoleDto>();
+
+	@JsonProperty("castingPrincipal")
+	private Set<ActeurDto> acteurs = new HashSet<ActeurDto>();
+
+	private Set<RealisateurDto> realisateurs = new HashSet<RealisateurDto>();
+
+	/**
+	 * Constructeur
 	 * 
 	 */
 	public FilmDto() {
 	}
 
-	/**Constructeur
+	/**
+	 * Constructeur
+	 * 
+	 * @param idImdb
+	 */
+	public FilmDto(String idImdb) {
+		this.idImdb = idImdb;
+	}
+
+	/**
+	 * Constructeur
+	 * 
 	 * @param idImdb
 	 * @param nom
 	 * @param url
@@ -69,10 +80,9 @@ public class FilmDto {
 	 * @param acteurs
 	 * @param realisateurs
 	 */
-	
-	public FilmDto(String idImdb, String nom, String url, String plot, String langue, Year anneeSortie,
-			Pays pays, Lieu lieuTournage, Set<Genre> genres, Set<Role> roles, Set<Acteur> acteurs,
-			Set<Realisateur> realisateurs) {
+	public FilmDto(String idImdb, String nom, String url, String plot, String langue, Year anneeSortie, PaysDto pays,
+			LieuDto lieuTournage, Set<GenreDto> genres, Set<RoleDto> roles, Set<ActeurDto> acteurs,
+			Set<RealisateurDto> realisateurs) {
 		this.idImdb = idImdb;
 		this.nom = nom;
 		this.url = url;
@@ -87,172 +97,228 @@ public class FilmDto {
 		this.realisateurs = realisateurs;
 	}
 
-	/**Getter pour l'attribut idImdb
+	/**
+	 * Getter pour l'attribut idImdb
+	 * 
 	 * @return the idImdb
 	 */
 	public String getIdImdb() {
 		return idImdb;
 	}
 
-	/**Setter pour l'attribut idImdb
+	/**
+	 * Setter pour l'attribut idImdb
+	 * 
 	 * @param idImdb the idImdb to set
 	 */
 	public void setIdImdb(String idImdb) {
 		this.idImdb = idImdb;
 	}
 
-	/**Getter pour l'attribut nom
+	/**
+	 * Getter pour l'attribut nom
+	 * 
 	 * @return the nom
 	 */
 	public String getNom() {
 		return nom;
 	}
 
-	/**Setter pour l'attribut nom
+	/**
+	 * Setter pour l'attribut nom
+	 * 
 	 * @param nom the nom to set
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
-	/**Getter pour l'attribut url
+	/**
+	 * Getter pour l'attribut url
+	 * 
 	 * @return the url
 	 */
 	public String getUrl() {
 		return url;
 	}
 
-	/**Setter pour l'attribut url
+	/**
+	 * Setter pour l'attribut url
+	 * 
 	 * @param url the url to set
 	 */
 	public void setUrl(String url) {
 		this.url = url;
 	}
 
-	/**Getter pour l'attribut plot
+	/**
+	 * Getter pour l'attribut plot
+	 * 
 	 * @return the plot
 	 */
 	public String getPlot() {
 		return plot;
 	}
 
-	/**Setter pour l'attribut plot
+	/**
+	 * Setter pour l'attribut plot
+	 * 
 	 * @param plot the plot to set
 	 */
 	public void setPlot(String plot) {
 		this.plot = plot;
 	}
 
-	/**Getter pour l'attribut langue
+	/**
+	 * Getter pour l'attribut langue
+	 * 
 	 * @return the langue
 	 */
 	public String getLangue() {
 		return langue;
 	}
 
-	/**Setter pour l'attribut langue
+	/**
+	 * Setter pour l'attribut langue
+	 * 
 	 * @param langue the langue to set
 	 */
 	public void setLangue(String langue) {
 		this.langue = langue;
 	}
 
-	/**Getter pour l'attribut anneeSortie
+	/**
+	 * Getter pour l'attribut anneeSortie
+	 * 
 	 * @return the anneeSortie
 	 */
 	public Year getAnneeSortie() {
 		return anneeSortie;
 	}
 
-	/**Setter pour l'attribut anneeSortie
+	/**
+	 * Setter pour l'attribut anneeSortie
+	 * 
 	 * @param anneeSortie the anneeSortie to set
 	 */
 	public void setAnneeSortie(Year anneeSortie) {
 		this.anneeSortie = anneeSortie;
 	}
 
-	/**Getter pour l'attribut pays
+	/**
+	 * Getter pour l'attribut pays
+	 * 
 	 * @return the pays
 	 */
-	public Pays getPays() {
+	public PaysDto getPays() {
 		return pays;
 	}
 
-	/**Setter pour l'attribut pays
+	/**
+	 * Setter pour l'attribut pays
+	 * 
 	 * @param pays the pays to set
 	 */
-	public void setPays(Pays pays) {
+	public void setPays(PaysDto pays) {
 		this.pays = pays;
 	}
 
-	/**Getter pour l'attribut lieuTournage
+	/**
+	 * Getter pour l'attribut lieuTournage
+	 * 
 	 * @return the lieuTournage
 	 */
-	public Lieu getLieuTournage() {
+	public LieuDto getLieuTournage() {
 		return lieuTournage;
 	}
 
-	/**Setter pour l'attribut lieuTournage
+	/**
+	 * Setter pour l'attribut lieuTournage
+	 * 
 	 * @param lieuTournage the lieuTournage to set
 	 */
-	public void setLieuTournage(Lieu lieuTournage) {
+	public void setLieuTournage(LieuDto lieuTournage) {
 		this.lieuTournage = lieuTournage;
 	}
 
-	/**Getter pour l'attribut genres
+	/**
+	 * Getter pour l'attribut genres
+	 * 
 	 * @return the genres
 	 */
-	public Set<Genre> getGenres() {
+	public Set<GenreDto> getGenres() {
 		return genres;
 	}
 
-	/**Setter pour l'attribut genres
+	/**
+	 * Setter pour l'attribut genres
+	 * 
 	 * @param genres the genres to set
 	 */
-	public void setGenres(Set<Genre> genres) {
+	public void setGenres(Set<GenreDto> genres) {
 		this.genres = genres;
 	}
 
-	/**Getter pour l'attribut roles
+	/**
+	 * Getter pour l'attribut roles
+	 * 
 	 * @return the roles
 	 */
-	public Set<Role> getRoles() {
+	public Set<RoleDto> getRoles() {
 		return roles;
 	}
 
-	/**Setter pour l'attribut roles
+	/**
+	 * Setter pour l'attribut roles
+	 * 
 	 * @param roles the roles to set
 	 */
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(Set<RoleDto> roles) {
 		this.roles = roles;
 	}
 
-	/**Getter pour l'attribut acteurs
+	/**
+	 * Getter pour l'attribut acteurs
+	 * 
 	 * @return the acteurs
 	 */
-	public Set<Acteur> getActeurs() {
+	public Set<ActeurDto> getActeurs() {
 		return acteurs;
 	}
 
-	/**Setter pour l'attribut acteurs
+	/**
+	 * Setter pour l'attribut acteurs
+	 * 
 	 * @param acteurs the acteurs to set
 	 */
-	public void setActeurs(Set<Acteur> acteurs) {
+	public void setActeurs(Set<ActeurDto> acteurs) {
 		this.acteurs = acteurs;
 	}
 
-	/**Getter pour l'attribut realisateurs
+	/**
+	 * Getter pour l'attribut realisateurs
+	 * 
 	 * @return the realisateurs
 	 */
-	public Set<Realisateur> getRealisateurs() {
+	public Set<RealisateurDto> getRealisateurs() {
 		return realisateurs;
 	}
 
-	/**Setter pour l'attribut realisateurs
+	/**
+	 * Setter pour l'attribut realisateurs
+	 * 
 	 * @param realisateurs the realisateurs to set
 	 */
-	public void setRealisateurs(Set<Realisateur> realisateurs) {
+	public void setRealisateurs(Set<RealisateurDto> realisateurs) {
 		this.realisateurs = realisateurs;
 	}
+
+	@Override
+	public String toString() {
+		return "FilmDto [idImdb=" + idImdb + ", nom=" + nom + ", url=" + url + ", plot=" + plot + ", langue=" + langue
+				+ ", anneeSortie=" + anneeSortie + ", pays=" + pays + ", lieuTournage=" + lieuTournage + ", genres="
+				+ genres + ", roles=" + roles + ", acteurs=" + acteurs + ", realisateurs=" + realisateurs + "]";
+	}
+
 
 }

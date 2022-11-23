@@ -7,15 +7,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 /**
  * @author antPinot
  *
  */
+
+@Entity
+@Table
 public class Genre {
 	
 	@Id
@@ -81,6 +86,11 @@ public class Genre {
 	 */
 	public void setFilms(Set<Film> films) {
 		this.films = films;
+	}
+
+	@Override
+	public String toString() {
+		return "Genre [id=" + id + ", libelle=" + libelle + ", films=" + films + "]";
 	}
 	
 

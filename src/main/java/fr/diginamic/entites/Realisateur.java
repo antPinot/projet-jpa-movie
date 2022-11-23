@@ -6,12 +6,17 @@ package fr.diginamic.entites;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 /**
  * @author antPinot
  *
  */
+
+@Entity
+@Table
 public class Realisateur extends Personne {
 	
 	@ManyToMany(mappedBy = "realisateurs")
@@ -31,5 +36,14 @@ public class Realisateur extends Personne {
 		super(identite, url);
 		// TODO Auto-generated constructor stub
 	}
+
+	@Override
+	public String toString() {
+		
+		return super.toString() + "Realisateur [films=" + films + "]";
+	}
+
+	
+	
 
 }

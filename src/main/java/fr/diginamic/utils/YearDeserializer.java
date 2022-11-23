@@ -20,7 +20,7 @@ public class YearDeserializer extends StdDeserializer<Year> {
 		String stringDate = p.readValueAs(String.class);
 		if (stringDate.length() >= 4) {
 			StringBuffer stringDateToFormat = new StringBuffer(stringDate);
-			StringBuffer stringFormatee = stringDateToFormat.replace(4, (stringDateToFormat.length()-1), "");
+			StringBuffer stringFormatee = stringDateToFormat.replace(4, (stringDateToFormat.length()), "");
 			return Year.parse(stringFormatee, DateTimeFormatter.ofPattern("yyyy"));
 		}
 		return null;

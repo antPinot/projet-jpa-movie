@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,16 +16,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-import fr.diginamic.utils.YearDeserializer;
+import javax.persistence.Table;
 
 /**
  * @author antPinot
  *
  */
+
+@Entity
+@Table
 public class Film {
 
 	@Id
@@ -71,7 +71,6 @@ public class Film {
 	
 	@ManyToMany
 	@JoinTable(name = "PERSONNE_FILM", joinColumns = @JoinColumn(name = "ID_PERSONNE", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_FILM", referencedColumnName = "ID"))
-	@JsonProperty("castingPrincipal")
 	private Set<Acteur> acteurs = new HashSet<Acteur>();
 	
 	@ManyToMany
@@ -84,6 +83,18 @@ public class Film {
 	 */
 	public Film() {
 	}
+	
+	
+
+	/**Constructeur
+	 * @param idImdb
+	 */
+	public Film(String idImdb) {
+		super();
+		this.idImdb = idImdb;
+	}
+
+
 
 	/**Constructeur
 	 * @param id
@@ -100,10 +111,9 @@ public class Film {
 	 * @param acteurs
 	 * @param realisateurs
 	 */
-	public Film(Integer id, String idImdb, String nom, String url, String plot, String langue, Year anneeSortie,
+	public Film(String idImdb, String nom, String url, String plot, String langue, Year anneeSortie,
 			Pays pays, Lieu lieuTournage, Set<Genre> genres, Set<Role> roles, Set<Acteur> acteurs,
 			Set<Realisateur> realisateurs) {
-		this.id = id;
 		this.idImdb = idImdb;
 		this.nom = nom;
 		this.url = url;
