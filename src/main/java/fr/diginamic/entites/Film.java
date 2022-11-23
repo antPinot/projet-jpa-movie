@@ -58,11 +58,11 @@ public class Film {
 	private Lieu lieuTournage;
 
 	@ManyToMany
-	@JoinTable(name = "GENRE_FILM", joinColumns = @JoinColumn(name = "ID_GENRE", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_FILM", referencedColumnName = "ID"))
+	@JoinTable(name = "GENRE_FILM", joinColumns = @JoinColumn(name = "ID_FILM", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_GENRE", referencedColumnName = "ID"))
 	private Set<Genre> genres = new HashSet<Genre>();
 	
 	@ManyToMany
-	@JoinTable(name = "ROLE_FILM", joinColumns = @JoinColumn(name = "ID_ROLE", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_FILM", referencedColumnName = "ID"))
+	@JoinTable(name = "ROLE_FILM", joinColumns = @JoinColumn(name = "ID_FILM", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_ROLE", referencedColumnName = "ID"))
 	private Set<Role> roles = new HashSet<Role>();
 	
 	/*@ManyToMany
@@ -70,11 +70,11 @@ public class Film {
 	private Set<Personne> personnes = new HashSet<Personne>();*/
 	
 	@ManyToMany
-	@JoinTable(name = "PERSONNE_FILM", joinColumns = @JoinColumn(name = "ID_PERSONNE", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_FILM", referencedColumnName = "ID"))
+	@JoinTable(name = "ACTEUR_FILM", joinColumns = @JoinColumn(name = "ID_FILM", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_ACTEUR", referencedColumnName = "ID"))
 	private Set<Acteur> acteurs = new HashSet<Acteur>();
 	
 	@ManyToMany
-	@JoinTable(name = "REALISATEUR_FILM", joinColumns = @JoinColumn(name = "ID_REALISATEUR", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_FILM", referencedColumnName = "ID"))
+	@JoinTable(name = "REALISATEUR_FILM", joinColumns = @JoinColumn(name = "ID_FILM", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_REALISATEUR", referencedColumnName = "ID"))
 	private Set<Realisateur> realisateurs = new HashSet<Realisateur>();
 
 	/**

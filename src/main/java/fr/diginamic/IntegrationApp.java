@@ -17,15 +17,15 @@ import javax.persistence.TypedQuery;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 
+import fr.diginamic.dao.ActeurDao;
 import fr.diginamic.dao.GenreDao;
+import fr.diginamic.dao.LieuDao;
 import fr.diginamic.dao.PaysDao;
 import fr.diginamic.dao.RealisateurDao;
 import fr.diginamic.dao.RoleDao;
 import fr.diginamic.entites.Acteur;
 import fr.diginamic.entites.Film;
 import fr.diginamic.entites.Genre;
-import fr.diginamic.entites.Lieu;
-import fr.diginamic.entites.Pays;
 import fr.diginamic.entites.Realisateur;
 import fr.diginamic.entites.Role;
 import fr.diginamic.utils.InternetMovieDatabase;
@@ -54,8 +54,14 @@ public class IntegrationApp {
 			transaction.begin();
 			
 			//Pays p = PaysDao.getPaysByNom(films.getPays().getNom(), em);
-			PaysDao.selectOrCreate(films.getPays(), em);
-			PaysDao.selectOrCreate(films.getLieuTournage().getPays(), em);
+			
+			if(films.getPays() != null) {
+				PaysDao.selectOrCreate(films.getPays(), em);
+			}
+			if (films.getLieuTournage() != null) {
+				PaysDao.selectOrCreate(films.getLieuTournage().getPays(), em);
+				LieuDao.selectOrCreate(films.getLieuTournage(), em);
+			}
 			
 			// Recherche du pays d'un Lieu de tournage d'un film
 			/*TypedQuery<Pays> queryLieuPays = em.createQuery("SELECT p FROM Pays p WHERE l.pays.nom =: param3",
@@ -71,10 +77,10 @@ public class IntegrationApp {
 
 			// Recherche du Lieu de tournage d'un film
 			
-			TypedQuery<Lieu> queryLieu = em.createQuery("SELECT l FROM Lieu l WHERE l.libelle= :param1 AND l.complement= :param2 AND l.pays = :param3", Lieu.class);
+			/*TypedQuery<Lieu> queryLieu = em.createQuery("SELECT l FROM Lieu l WHERE l.libelle= :param1 AND l.complement= :param2 AND l.pays.nom = :param3", Lieu.class);
 			queryLieu.setParameter("param1", films.getLieuTournage().getLibelle());
 			queryLieu.setParameter("param2", films.getLieuTournage().getComplement());
-			queryLieu.setParameter("param3", films.getLieuTournage().getPays());
+			queryLieu.setParameter("param3", films.getLieuTournage().getPays().getNom());
 			List<Lieu> lieuResult = queryLieu.getResultList();
 
 			if (lieuResult.size() == 0) {
@@ -82,7 +88,9 @@ public class IntegrationApp {
 				em.persist(films.getLieuTournage());
 			} else {
 				films.setLieuTournage(lieuResult.get(0));
-			}
+			}*/
+			
+			
 
 			//Set<Role> rolesUpdate = new HashSet<Role>();
 
@@ -99,7 +107,7 @@ public class IntegrationApp {
 					rolesUpdate.add(rolesResult.get(0));
 				}*/
 				
-				RoleDao.getRoleByCharacterName(roles.getCharacterName(), em);
+				RoleDao.selectOrCreate(roles, em);
 			}
 
 			//films.setRoles(rolesUpdate);
@@ -118,7 +126,7 @@ public class IntegrationApp {
 					genresUpdate.add(genresResult.get(0));
 				}*/
 				
-				GenreDao.getGenreByLibelle(genres.getLibelle(), em);
+				GenreDao.selectOrCreate(genres, em);
 			}
 
 			//films.setGenres(genresUpdate);
@@ -137,28 +145,34 @@ public class IntegrationApp {
 					realisateursUpdate.add(realisateursResult.get(0));
 				}*/
 				
-				RealisateurDao.getRealisateurByIdentite(realisateurs.getIdentite(), em);
+				RealisateurDao.selectOrCreate(realisateurs, em);
 			}
 
 			//films.setRealisateurs(realisateursUpdate);
 
-			Set<Acteur> acteursUpdate = new HashSet<Acteur>();
+			//Set<Acteur> acteursUpdate = new HashSet<Acteur>();
 
 			for (Acteur acteurs : films.getActeurs()) {
-				TypedQuery<Acteur> queryActeur = em.createQuery("SELECT a FROM Acteur a WHERE a.identite = :param7",
+				/*TypedQuery<Acteur> queryActeur = em.createQuery("SELECT a FROM Acteur a WHERE a.identite = :param7",
 						Acteur.class);
 				queryActeur.setParameter("param7", acteurs.getIdentite());
-				List<Acteur> acteursResult = queryActeur.getResultList();
-				TypedQuery<Lieu> queryActeurLieu = em
+				List<Acteur> acteursResult = queryActeur.getResultList();*/
+				
+				PaysDao.selectOrCreate(acteurs.getLieuNaissance().getPays(), em);
+				LieuDao.selectOrCreate(acteurs.getLieuNaissance(), em);
+				ActeurDao.selectOrCreate(acteurs, em);
+				
+				
+				/*TypedQuery<Lieu> queryActeurLieu = em
 						.createQuery("SELECT a FROM Acteur a WHERE a.lieuNaissance = :param8", Lieu.class);
 				queryActeurLieu.setParameter("param8", acteurs.getLieuNaissance());
-				List<Lieu> acteursLieuResult = queryActeurLieu.getResultList();
-				TypedQuery<Pays> queryActeurPays = em
+				List<Lieu> acteursLieuResult = queryActeurLieu.getResultList();*/
+				/*TypedQuery<Pays> queryActeurPays = em
 						.createQuery("SELECT p FROM Pays p WHERE a.lieuNaissance.pays = :param9", Pays.class);
 				queryActeur.setParameter("param9", acteurs.getLieuNaissance().getPays());
-				List<Pays> acteursPaysResult = queryActeurPays.getResultList();
+				List<Pays> acteursPaysResult = queryActeurPays.getResultList();*/
 
-				if (acteursResult.size() == 0 && acteursLieuResult.size() == 0 && acteursPaysResult.size() == 0) {
+				/*if (acteursResult.size() == 0 && acteursLieuResult.size() == 0 && acteursPaysResult.size() == 0) {
 					em.persist(acteurs);
 					em.persist(acteurs.getLieuNaissance());
 					em.persist(acteurs.getLieuNaissance().getPays());
@@ -166,7 +180,7 @@ public class IntegrationApp {
 						&& acteursPaysResult.size() == 0) {
 					em.persist(acteurs.getLieuNaissance().getPays());
 					acteursUpdate.add(acteursResult.get(0));
-				}
+				}*/
 			}
 
 			/*

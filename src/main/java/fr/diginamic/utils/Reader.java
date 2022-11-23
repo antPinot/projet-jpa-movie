@@ -30,7 +30,7 @@ public class Reader {
 
 		List<Film> internetMovieDatabase = new ArrayList<Film>();
 
-		List<FilmDto> imdbDto = DtoGenerator();
+		List<FilmDto> imdbDto = dtoGenerator();
 
 		for (FilmDto film : imdbDto) {
 			internetMovieDatabase.add(new Film(film.getIdImdb(), film.getNom(), film.getUrl(), film.getPlot(),
@@ -45,7 +45,7 @@ public class Reader {
 		return internetMovieDatabase;
 	}
 
-	public static List<FilmDto> DtoGenerator() throws StreamReadException, DatabindException, IOException {
+	public static List<FilmDto> dtoGenerator() throws StreamReadException, DatabindException, IOException {
 
 		File fileToParse = new File(
 				"C://Users//Saranthony//Documents//Reconversion Professionnelle//Apprentissage Programmation//Diginamic//Projet//17 - PROJET JPA//Projet 1 - Internet Movie Database//films.json");
