@@ -19,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
+ * Représente un film avec tous ses attributs
+ * 
  * @author antPinot
  *
  */
@@ -31,36 +33,46 @@ public class Film {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	/** idImdb représente la clé métier de la base IMDB*/
 	@Column(name = "ID_IMDB", nullable = false, unique = true)
 	private String idImdb;
-
+	
+	/** nom du film*/
 	@Column(name = "NOM")
 	private String nom;
-
+	
+	/** url sur le site imdb*/
 	@Column(name = "URL")
 	private String url;
-
+	
+	/** plot(synopsis) du film*/
 	@Column(name = "PLOT")
 	private String plot;
 
+	/** langue du film*/
 	@Column(name = "LANGUE")
 	private String langue;
 
+	/** année de sortie du film*/
 	@Column(name = "ANNEE_SORTIE")
 	private Year anneeSortie;
 
+	/** Pays d'origine du film*/
 	@ManyToOne
 	@JoinColumn(name = "ID_PAYS_FILM")
 	private Pays pays;
 
+	/** Lieu de tournage du film*/
 	@ManyToOne
 	@JoinColumn(name = "ID_LIEU_FILM")
 	private Lieu lieuTournage;
 
+	/** Genres associés au film*/
 	@ManyToMany
 	@JoinTable(name = "GENRE_FILM", joinColumns = @JoinColumn(name = "ID_FILM", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_GENRE", referencedColumnName = "ID"))
 	private Set<Genre> genres = new HashSet<Genre>();
 	
+	/** Roles associés au film*/
 	@ManyToMany
 	@JoinTable(name = "ROLE_FILM", joinColumns = @JoinColumn(name = "ID_FILM", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_ROLE", referencedColumnName = "ID"))
 	private Set<Role> roles = new HashSet<Role>();
@@ -69,16 +81,18 @@ public class Film {
 	@JoinTable(name = "PERSONNE_FILM", joinColumns = @JoinColumn(name = "ID_PERSONNE", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_FILM", referencedColumnName = "ID"))
 	private Set<Personne> personnes = new HashSet<Personne>();*/
 	
+	/** Acteurs associés au film*/
 	@ManyToMany
 	@JoinTable(name = "ACTEUR_FILM", joinColumns = @JoinColumn(name = "ID_FILM", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_ACTEUR", referencedColumnName = "ID"))
 	private Set<Acteur> acteurs = new HashSet<Acteur>();
 	
+	/** Réalisateurs associés au film*/
 	@ManyToMany
 	@JoinTable(name = "REALISATEUR_FILM", joinColumns = @JoinColumn(name = "ID_FILM", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_REALISATEUR", referencedColumnName = "ID"))
 	private Set<Realisateur> realisateurs = new HashSet<Realisateur>();
 
 	/**
-	 * Constructeur
+	 * Constructeur vide pour la construction des entités Hibernate
 	 * 
 	 */
 	public Film() {
@@ -86,8 +100,9 @@ public class Film {
 	
 	
 
-	/**Constructeur
-	 * @param idImdb
+	/**Constructeur secondaire basé uniquement sur la clé métier imdb
+	 * 
+	 * @param idImdb 
 	 */
 	public Film(String idImdb) {
 		super();

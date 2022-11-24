@@ -48,7 +48,7 @@ public class Reader {
 	public static List<FilmDto> dtoGenerator() throws StreamReadException, DatabindException, IOException {
 
 		File fileToParse = new File(
-				"C:/Users/dev_prolo/Documents/17 - PROJET JPA/Projet 1 - Internet Movie Database/film2.json");
+				"C:/Users/dev_prolo/Documents/17 - PROJET JPA/Projet 1 - Internet Movie Database/films.json");
 
 		ObjectMapper mapper = new ObjectMapper();
 

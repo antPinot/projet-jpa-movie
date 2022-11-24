@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
+ * Représente un acteur avec tous ses attributs
+ * 
  * @author antPinot
  *
  */

@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -39,7 +41,8 @@ public class Role {
 	@ManyToMany(mappedBy = "roles")
 	private Set<Film> films = new HashSet<Film>();
 	
-	@ManyToMany(mappedBy = "roles")
+	@ManyToMany
+	@JoinTable(name = "ROLE_ACTEUR", joinColumns = @JoinColumn(name = "ID_ROLE", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_ACTEUR", referencedColumnName = "ID"))
 	private Set<Acteur> acteurs = new HashSet<Acteur>();
 
 	/**Constructeur
