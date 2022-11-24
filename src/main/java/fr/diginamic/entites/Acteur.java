@@ -38,7 +38,7 @@ public class Acteur extends Personne {
 	private Lieu lieuNaissance;
 	
 	@ManyToMany
-	@JoinTable(name = "ROLE_ACTEUR", joinColumns = @JoinColumn(name = "ID_ROLE", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_ACTEUR", referencedColumnName = "ID"))
+	@JoinTable(name = "ROLE_ACTEUR", joinColumns = @JoinColumn(name = "ID_ACTEUR", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_ROLE", referencedColumnName = "ID"))
 	private Set<Role> roles = new HashSet<Role>();
 	
 	@ManyToMany(mappedBy = "acteurs")

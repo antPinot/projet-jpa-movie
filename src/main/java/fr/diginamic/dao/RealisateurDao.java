@@ -3,12 +3,16 @@
  */
 package fr.diginamic.dao;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import fr.diginamic.entites.Realisateur;
+import fr.diginamic.entites.Role;
 
 /**
  * @author antPinot
@@ -36,6 +40,17 @@ public class RealisateurDao {
 		} else {
 			realisateur.setId(query.getId());
 		}
+	}
+	
+	public static void removeDoublonsRealisateurs(Set<Realisateur> realisateurs) {
+		HashMap<String, Realisateur> gestionDoublons = new HashMap<String, Realisateur>();
+		Set<Realisateur> doublonsToRemove = new HashSet<Realisateur>();
+		for (Realisateur realisaeurDoublons : realisateurs) {
+			if (gestionDoublons.put(realisaeurDoublons.getIdentite(), realisaeurDoublons) != null) {
+				doublonsToRemove.add(realisaeurDoublons);
+			}
+		}
+		realisateurs.removeAll(doublonsToRemove);
 	}
 
 }

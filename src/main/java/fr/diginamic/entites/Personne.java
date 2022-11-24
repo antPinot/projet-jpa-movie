@@ -48,6 +48,31 @@ public abstract class Personne {
 	
 	
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((identite == null) ? 0 : identite.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Personne other = (Personne) obj;
+		if (identite == null) {
+			if (other.identite != null)
+				return false;
+		} else if (!identite.equals(other.identite))
+			return false;
+		return true;
+	}
+
 	/**Getter pour l'attribut id
 	 * @return the id
 	 */

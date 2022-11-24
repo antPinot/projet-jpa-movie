@@ -3,12 +3,16 @@
  */
 package fr.diginamic.dao;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import fr.diginamic.entites.Acteur;
+import fr.diginamic.entites.Role;
 
 /**
  * @author antPinot
@@ -36,6 +40,17 @@ public class ActeurDao {
 		} else {
 			acteur.setId(query.getId());
 		}
+	}
+	
+	public static void removeDoublonsActeur(Set<Acteur> acteurs) {
+		HashMap<String, Acteur> gestionDoublons = new HashMap<String, Acteur>();
+		Set<Acteur> doublonsToRemove = new HashSet<Acteur>();
+		for (Acteur acteurDoublons : acteurs) {
+			if (gestionDoublons.put(acteurDoublons.getIdentite(), acteurDoublons) != null) {
+				doublonsToRemove.add(acteurDoublons);
+			}
+		}
+		acteurs.removeAll(doublonsToRemove);
 	}
 
 }

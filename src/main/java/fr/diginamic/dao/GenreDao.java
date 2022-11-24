@@ -3,12 +3,16 @@
  */
 package fr.diginamic.dao;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import fr.diginamic.entites.Genre;
+import fr.diginamic.entites.Role;
 
 /**
  * @author antPinot
@@ -36,6 +40,17 @@ public class GenreDao {
 		} else {
 			genre.setId(query.getId());
 		}
+	}
+	
+	public static void removeDoublonsGenre(Set<Genre> genres) {
+		HashMap<String, Genre> gestionDoublons = new HashMap<String, Genre>();
+		Set<Genre> doublonsToRemove = new HashSet<Genre>();
+		for (Genre genreDoublons : genres) {
+			if (gestionDoublons.put(genreDoublons.getLibelle(), genreDoublons) != null) {
+				doublonsToRemove.add(genreDoublons);
+			}
+		}
+		genres.removeAll(doublonsToRemove);
 	}
 
 }
