@@ -11,34 +11,52 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import fr.diginamic.utils.YearDeserializer;
 
+/**
+ * Représente un Film (Data Transfer Object) à déserialiser en entité
+ * 
+ * @author antPinot
+ *
+ */
 public class FilmDto {
 
+	/** idImdb clé métier de la base Imdb */
 	@JsonProperty("id")
 	private String idImdb;
-
+	
+	/** nom */
 	private String nom;
-
+	
+	/** url */
 	private String url;
 
+	/** plot */
 	private String plot;
 
+	/** langue */
 	private String langue;
 
+	/** anneeSortie*/
 	@JsonDeserialize(using = YearDeserializer.class)
 	private Year anneeSortie;
 
+	/** pays de réalisation*/
 	private PaysDto pays;
 
+	/** lieu de tournage */
 	@JsonInclude(Include.NON_NULL)
 	private LieuDto lieuTournage;
 
+	/** liste(set) des genres associés au film */
 	private Set<GenreDto> genres = new HashSet<GenreDto>();
 
+	/** liste(set) des roles associés au film*/
 	private Set<RoleDto> roles = new HashSet<RoleDto>();
 
+	/** liste(set) des acteurs jouant dans le film*/
 	@JsonProperty("castingPrincipal")
 	private Set<ActeurDto> acteurs = new HashSet<ActeurDto>();
 
+	/** liste(set) des réalisateurs du film*/
 	private Set<RealisateurDto> realisateurs = new HashSet<RealisateurDto>();
 
 	/**

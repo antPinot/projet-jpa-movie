@@ -6,20 +6,27 @@ package fr.diginamic.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * Représente un rôle (Data Transfer Object) à déserialiser en entité
+ * 
  * @author antPinot
  *
  */
 public class RoleDto {
 
+	/** nom du personnage */
 	private String characterName;
 
+	/** acteur jouant le role */
 	@JsonProperty("acteur")
 	private ActeurDto acteur;
 
+	/** url */
 	private String url;
 
+	/** hauteur */
 	private String height;
 
+	/** film associé */
 	private String film;
 
 	/**

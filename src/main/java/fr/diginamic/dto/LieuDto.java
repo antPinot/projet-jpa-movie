@@ -6,17 +6,22 @@ package fr.diginamic.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * Représente un Lieu (Data Transfer Object) à déserialiser en entité
+ * 
  * @author antPinot
  *
  */
 public class LieuDto {
 
+	/** libelle */
 	@JsonProperty("ville")
 	private String libelle;
-
+	
+	/** complement */
 	@JsonProperty("etatDept")
 	private String complement;
-
+	
+	/** pays */
 	private PaysDto pays;
 
 	/**

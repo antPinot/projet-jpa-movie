@@ -4,11 +4,14 @@
 package fr.diginamic.dto;
 
 /**
+ * Représente un Genre (Data Transfer Object) à déserialiser en entité
+ * 
  * @author antPinot
  *
  */
 public class GenreDto {
-
+	
+	/** libelle */
 	private String libelle;
 
 	/**

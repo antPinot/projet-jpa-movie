@@ -4,13 +4,18 @@
 package fr.diginamic.dto;
 
 /**
+ * 
+ * Représente un Pays (Data Transfer Object) à déserialiser en entité
+ * 
  * @author antPinot
  *
  */
 public class PaysDto {
 
+	/** nom */
 	private String nom;
 
+	/** url */
 	private String url;
 
 	/**

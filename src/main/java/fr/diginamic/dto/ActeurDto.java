@@ -15,22 +15,46 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * Représente un acteur (Data Transfer Object) à déserialiser en entité
+ * 
  * @author antPinot
  *
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ActeurDto {
 
+	/** idImdb clé métier de la base Imdb */
 	@JsonProperty("id")
 	private String idImdb;
-
+	
+	/** identite nom de l'acteur */
 	@JsonProperty("identite")
 	private String identite;
 
+	/** dateNaissance */
 	private LocalDate dateNaissance;
-
+	
+	/** lieuNaissance */
 	private LieuDto lieuNaissance;
-
+	
+	/**
+	 * Méthode utilisée par la méthode Jackson pour extraire les nested properties
+	 * de l'objet naissance du JSON
+	 * <p>
+	 * Prévoit les différents cas de figure pour le lieu de naissance :
+	 * ville,region,pays/
+	 * ville,pays/
+	 * region,pays/
+	 * quartier,ville,region,pays(dans ce cas de figure le quartier est ignoré)
+	 * <p>
+	 * Prévoit les différents cas de figure pour la date de naisance :
+	 * date de naissance absente/
+	 * mois à 0/
+	 * jour à 0/
+	 * année à 0/
+	 * 
+	 * @param naissanceObject
+	 */
 	@JsonProperty("naissance")
 	private void unpack(Map<String, String> naissanceObject) {
 		if (naissanceObject != null) {
@@ -38,29 +62,34 @@ public class ActeurDto {
 			if (lieuNaissanceString != null) {
 				String[] lieuNaissanceDecoupe = lieuNaissanceString.split(",");
 				if (lieuNaissanceDecoupe.length == 3) {
-					this.lieuNaissance = new LieuDto(lieuNaissanceDecoupe[0], lieuNaissanceDecoupe[1], new PaysDto(lieuNaissanceDecoupe[2]));
-				}else if (lieuNaissanceDecoupe.length ==1){
+					this.lieuNaissance = new LieuDto(lieuNaissanceDecoupe[0], lieuNaissanceDecoupe[1],
+							new PaysDto(lieuNaissanceDecoupe[2]));
+				} else if (lieuNaissanceDecoupe.length == 1) {
 					this.lieuNaissance = new LieuDto(new PaysDto(lieuNaissanceDecoupe[0]));
-				}else if(lieuNaissanceDecoupe.length == 2) {
+				} else if (lieuNaissanceDecoupe.length == 2) {
 					this.lieuNaissance = new LieuDto(lieuNaissanceDecoupe[0], new PaysDto(lieuNaissanceDecoupe[1]));
-				}else if (lieuNaissanceDecoupe.length >3){
-					this.lieuNaissance = new LieuDto(lieuNaissanceDecoupe[1], lieuNaissanceDecoupe[2], new PaysDto(lieuNaissanceDecoupe[3]));
+				} else if (lieuNaissanceDecoupe.length > 3) {
+					this.lieuNaissance = new LieuDto(lieuNaissanceDecoupe[1], lieuNaissanceDecoupe[2],
+							new PaysDto(lieuNaissanceDecoupe[3]));
 				}
 			}
 			String date = naissanceObject.get("dateNaissance");
-			if (StringUtils.isNotEmpty(date) && date.indexOf("-0-0")==-1 && !date.endsWith("-0") && !date.startsWith("0-")){
-				this.dateNaissance = LocalDate.parse(date,
-						DateTimeFormatter.ofPattern("yyyy-M-d"));
+			if (StringUtils.isNotEmpty(date) && date.indexOf("-0-0") == -1 && !date.endsWith("-0")
+					&& !date.startsWith("0-")) {
+				this.dateNaissance = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-M-d"));
 			}
 
 		}
 
 	}
 
+	/**height hauteur de l'acteur */
 	private String height;
 
+	/**url lien imdb */
 	private String url;
 
+	/** roles liste(Set) des roles tenus par l'acteur*/
 	private Set<RoleDto> roles = new HashSet<RoleDto>();
 
 	/**
@@ -160,14 +189,18 @@ public class ActeurDto {
 		this.roles = roles;
 	}
 
-	/**Getter pour l'attribut lieuNaissance
+	/**
+	 * Getter pour l'attribut lieuNaissance
+	 * 
 	 * @return the lieuNaissance
 	 */
 	public LieuDto getLieuNaissance() {
 		return lieuNaissance;
 	}
 
-	/**Setter pour l'attribut lieuNaissance
+	/**
+	 * Setter pour l'attribut lieuNaissance
+	 * 
 	 * @param lieuNaissance the lieuNaissance to set
 	 */
 	public void setLieuNaissance(LieuDto lieuNaissance) {

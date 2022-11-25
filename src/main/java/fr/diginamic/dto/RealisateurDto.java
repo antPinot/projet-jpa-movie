@@ -4,13 +4,17 @@
 package fr.diginamic.dto;
 
 /**
+ * Représente un réalisateur (Data Transfer Object) à déserialiser en entité
+ * 
  * @author antPinot
  *
  */
 public class RealisateurDto {
 
+	/** identite */
 	private String identite;
 
+	/** url */
 	private String url;
 
 	/**
