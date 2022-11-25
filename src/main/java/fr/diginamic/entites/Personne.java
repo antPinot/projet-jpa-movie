@@ -12,9 +12,11 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-
-
 /**
+ * Classe abstraite représentant une personne
+ * <p>
+ * Classe mère de Realisateur et Acteur
+ * 
  * @author antPinot
  *
  */
@@ -23,21 +25,26 @@ import javax.persistence.Table;
 @Table
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Personne {
-	
+
+	/** id clé primaire */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer id;
-	
+
+	/** identite */
 	@Column(name = "IDENTITE")
 	protected String identite;
-	
+
+	/** url */
 	@Column(name = "URL")
 	protected String url;
 
 	public Personne() {
 	}
 
-	/**Constructeur
+	/**
+	 * Constructeur
+	 * 
 	 * @param identite
 	 * @param url
 	 */
@@ -45,8 +52,6 @@ public abstract class Personne {
 		this.identite = identite;
 		this.url = url;
 	}
-	
-	
 
 	@Override
 	public int hashCode() {
@@ -73,42 +78,54 @@ public abstract class Personne {
 		return true;
 	}
 
-	/**Getter pour l'attribut id
+	/**
+	 * Getter pour l'attribut id
+	 * 
 	 * @return the id
 	 */
 	public Integer getId() {
 		return id;
 	}
 
-	/**Setter pour l'attribut id
+	/**
+	 * Setter pour l'attribut id
+	 * 
 	 * @param id the id to set
 	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	/**Getter pour l'attribut identite
+	/**
+	 * Getter pour l'attribut identite
+	 * 
 	 * @return the identite
 	 */
 	public String getIdentite() {
 		return identite;
 	}
 
-	/**Setter pour l'attribut identite
+	/**
+	 * Setter pour l'attribut identite
+	 * 
 	 * @param identite the identite to set
 	 */
 	public void setIdentite(String identite) {
 		this.identite = identite;
 	}
 
-	/**Getter pour l'attribut url
+	/**
+	 * Getter pour l'attribut url
+	 * 
 	 * @return the url
 	 */
 	public String getUrl() {
 		return url;
 	}
 
-	/**Setter pour l'attribut url
+	/**
+	 * Setter pour l'attribut url
+	 * 
 	 * @param url the url to set
 	 */
 	public void setUrl(String url) {
@@ -119,9 +136,5 @@ public abstract class Personne {
 	public String toString() {
 		return "Personne [id=" + id + ", identite=" + identite + ", url=" + url + "]";
 	}
-	
-	
 
 }
-
-

@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
+ * Représente un rôle avec tous ses attributs
+ * 
  * @author antPinot
  *
  */
@@ -25,22 +27,28 @@ import javax.persistence.Table;
 @Table
 public class Role {
 	
+	/** id clé primaire*/
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	/** nom du personnage */
 	@Column(name = "CHARACTER_NAME")
 	private String characterName;
 	
+	/** url */
 	@Column(name = "URL")
 	private String url;
 	
+	/** height */
 	@Column(name = "HEIGHT")
 	private String height;
 	
+	/** films */
 	@ManyToMany(mappedBy = "roles")
 	private Set<Film> films = new HashSet<Film>();
 	
+	/** acteurs */
 	@ManyToMany
 	@JoinTable(name = "ROLE_ACTEUR", joinColumns = @JoinColumn(name = "ID_ROLE", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_ACTEUR", referencedColumnName = "ID"))
 	private Set<Acteur> acteurs = new HashSet<Acteur>();

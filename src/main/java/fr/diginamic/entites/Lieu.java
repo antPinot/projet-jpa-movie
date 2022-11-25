@@ -17,6 +17,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
+ * Représente un lieu avec tous ses attributs
+ * <p>
+ * Un lieu peut être un lieu de naissance d'une personne 
+ * ou un lieu de tournage d'un film
+ * 
  * @author antPinot
  *
  */
@@ -25,23 +30,29 @@ import javax.persistence.Table;
 @Table
 public class Lieu {
 
+	/** id clé primaire */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	/** libelle */
 	@Column(name = "LIBELLE")
 	private String libelle;
 
+	/** complement */
 	@Column(name = "COMPLEMENT")
 	private String complement;
 
+	/** pays */
 	@ManyToOne
 	@JoinColumn(name = "ID_PAYS_LIEU")
 	private Pays pays;
 
+	/** acteurs */
 	@OneToMany(mappedBy = "lieuNaissance")
 	private Set<Acteur> acteurs = new HashSet<Acteur>();
 
+	/** films */
 	@OneToMany(mappedBy = "lieuTournage")
 	private Set<Film> films = new HashSet<Film>();
 

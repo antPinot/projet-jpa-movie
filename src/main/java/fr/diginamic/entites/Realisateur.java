@@ -11,6 +11,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
+ * Représente un réalisateur avec tous ses attributs
+ * <p>
+ * Classe fille de Personne
+ * 
  * @author antPinot
  *
  */
@@ -19,6 +23,7 @@ import javax.persistence.Table;
 @Table
 public class Realisateur extends Personne {
 	
+	/** films */
 	@ManyToMany(mappedBy = "realisateurs")
 	private Set<Film> films = new HashSet<Film>();
 	
