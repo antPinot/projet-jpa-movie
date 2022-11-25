@@ -16,7 +16,18 @@ import fr.diginamic.entites.Pays;
  */
 public class PaysDao {
 
-	public static Pays getPaysByNom(String nom, EntityManager em) {
+	private EntityManager em;
+
+	/**
+	 * Constructeur
+	 * 
+	 * @param em
+	 */
+	public PaysDao(EntityManager em) {
+		this.em = em;
+	}
+
+	public Pays getPaysByNom(String nom) {
 		TypedQuery<Pays> queryPays = em.createQuery("SELECT p FROM Pays p WHERE p.nom = :param1", Pays.class);
 		queryPays.setParameter("param1", nom);
 		List<Pays> paysResult = queryPays.getResultList();
@@ -27,14 +38,27 @@ public class PaysDao {
 			return paysResult.get(0);
 		}
 	}
-	
-	public static void selectOrCreate(Pays pays, EntityManager em) {
-		Pays query = getPaysByNom(pays.getNom(), em);
-		if (query == null) {
-			em.persist(pays);
-		} else {
-			pays.setId(query.getId());
-		}
+
+	public void insert(Pays pays) {
+		em.persist(pays);
+	}
+
+	/**
+	 * Getter pour l'attribut em
+	 * 
+	 * @return the em
+	 */
+	public EntityManager getEm() {
+		return em;
+	}
+
+	/**
+	 * Setter pour l'attribut em
+	 * 
+	 * @param em the em to set
+	 */
+	public void setEm(EntityManager em) {
+		this.em = em;
 	}
 
 }

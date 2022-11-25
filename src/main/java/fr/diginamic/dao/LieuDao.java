@@ -16,7 +16,18 @@ import fr.diginamic.entites.Lieu;
  */
 public class LieuDao {
 
-	public static Lieu getLieuByDatas(String libelle, String complement, String nom, EntityManager em) {
+	private EntityManager em;
+
+	/**
+	 * Constructeur
+	 * 
+	 * @param em
+	 */
+	public LieuDao(EntityManager em) {
+		this.em = em;
+	}
+
+	public Lieu getLieuByDatas(String libelle, String complement, String nom) {
 		TypedQuery<Lieu> queryLieu = em.createQuery(
 				"SELECT l FROM Lieu l WHERE l.libelle= :param1 AND l.complement= :param2 AND l.pays.nom = :param3",
 				Lieu.class);
@@ -32,13 +43,26 @@ public class LieuDao {
 		}
 	}
 
-	public static void selectOrCreate(Lieu lieu, EntityManager em) {
-			Lieu query = getLieuByDatas(lieu.getLibelle(), lieu.getComplement(), lieu.getPays().getNom(), em);
-			if (query == null) {
-				em.persist(lieu);
-			} else {
-				lieu.setId(query.getId());
-			}
-		}
-
+	public void insert(Lieu lieu) {
+		em.persist(lieu);
 	}
+
+	/**
+	 * Getter pour l'attribut em
+	 * 
+	 * @return the em
+	 */
+	public EntityManager getEm() {
+		return em;
+	}
+
+	/**
+	 * Setter pour l'attribut em
+	 * 
+	 * @param em the em to set
+	 */
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+
+}
