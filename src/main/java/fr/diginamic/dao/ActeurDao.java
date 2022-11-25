@@ -39,6 +39,16 @@ public class ActeurDao {
 			return acteursResult.get(0);
 		}
 	}
+	
+	public List<Acteur> getCasting(String saisieFilm){
+		TypedQuery<Acteur> queryCasting = em.createQuery("SELECT a FROM Acteur a JOIN a.films f WHERE f.nom = :saisieFilm",
+				Acteur.class);
+		queryCasting.setParameter("saisieFilm", saisieFilm);
+		List<Acteur> queryCastingResult = queryCasting.getResultList();
+		
+		return queryCastingResult;
+		
+	}
 
 	public void insert(Acteur acteur) {
 		em.persist(acteur);

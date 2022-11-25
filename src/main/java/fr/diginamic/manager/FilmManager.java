@@ -21,6 +21,8 @@ import fr.diginamic.entites.Role;
 public class FilmManager {
 
 	private EntityManager em;
+	
+	private FilmService filmService;
 
 	private ActeurService acteurService;
 
@@ -43,6 +45,7 @@ public class FilmManager {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("projet-jpa-movie");
 		EntityManager em = entityManagerFactory.createEntityManager();
 
+		filmService = new FilmService(em);
 		acteurService = new ActeurService(em);
 		genreService = new GenreService(em);
 		lieuService = new LieuService(em);
@@ -62,12 +65,12 @@ public class FilmManager {
 		ActeurService.removeDoublonsActeur(film.getActeurs());
 		GenreService.removeDoublonsGenre(film.getGenres());
 
-		// Persistance des pays
+		// Persistance du pays de réalisation
 		if (film.getPays() != null) {
 			paysService.selectOrCreate(film.getPays());
 		}
 
-		// Persistance des lieux de tournage
+		// Persistance du lieu de tournage
 		if (film.getLieuTournage() != null) {
 			paysService.selectOrCreate(film.getLieuTournage().getPays());
 			lieuService.selectOrCreate(film.getLieuTournage());
@@ -107,7 +110,9 @@ public class FilmManager {
 			acteurService.selectOrCreate(acteurs);
 
 		}
-		em.persist(film);
+		
+		// Persistance du film
+		filmService.selectOrCreate(film);
 
 		transaction.commit();
 

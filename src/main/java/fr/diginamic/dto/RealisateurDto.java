@@ -3,12 +3,6 @@
  */
 package fr.diginamic.dto;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.ManyToMany;
-
 /**
  * @author antPinot
  *

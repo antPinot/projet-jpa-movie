@@ -3,15 +3,6 @@
  */
 package fr.diginamic.dto;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
 /**
  * @author antPinot
  *
@@ -78,9 +69,5 @@ public class PaysDto {
 	public String toString() {
 		return "PaysDto [nom=" + nom + ", url=" + url + "]";
 	}
-	
-	
-
-	
 
 }

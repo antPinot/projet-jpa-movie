@@ -3,19 +3,6 @@
  */
 package fr.diginamic.dto;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -38,10 +25,10 @@ public class LieuDto {
 	 */
 	public LieuDto() {
 	}
-	
-	
 
-	/**Constructeur
+	/**
+	 * Constructeur
+	 * 
 	 * @param pays
 	 */
 	public LieuDto(PaysDto pays) {
@@ -49,7 +36,9 @@ public class LieuDto {
 		this.pays = pays;
 	}
 
-	/**Constructeur
+	/**
+	 * Constructeur
+	 * 
 	 * @param ville
 	 * @param pays
 	 */
@@ -59,9 +48,9 @@ public class LieuDto {
 		this.pays = pays;
 	}
 
-
-
-	/**Constructeur
+	/**
+	 * Constructeur
+	 * 
 	 * @param ville
 	 * @param etatDept
 	 * @param pays
@@ -73,65 +62,63 @@ public class LieuDto {
 		this.pays = pays;
 	}
 
-
-
-	/**Getter pour l'attribut libelle
+	/**
+	 * Getter pour l'attribut libelle
+	 * 
 	 * @return the libelle
 	 */
 	public String getLibelle() {
 		return libelle;
 	}
 
-
-
-	/**Setter pour l'attribut libelle
+	/**
+	 * Setter pour l'attribut libelle
+	 * 
 	 * @param libelle the libelle to set
 	 */
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
 
-
-
-	/**Getter pour l'attribut complement
+	/**
+	 * Getter pour l'attribut complement
+	 * 
 	 * @return the complement
 	 */
 	public String getComplement() {
 		return complement;
 	}
 
-
-
-	/**Setter pour l'attribut complement
+	/**
+	 * Setter pour l'attribut complement
+	 * 
 	 * @param complement the complement to set
 	 */
 	public void setComplement(String complement) {
 		this.complement = complement;
 	}
 
-
-
-	/**Getter pour l'attribut pays
+	/**
+	 * Getter pour l'attribut pays
+	 * 
 	 * @return the pays
 	 */
 	public PaysDto getPays() {
 		return pays;
 	}
 
-
-
-	/**Setter pour l'attribut pays
+	/**
+	 * Setter pour l'attribut pays
+	 * 
 	 * @param pays the pays to set
 	 */
 	public void setPays(PaysDto pays) {
 		this.pays = pays;
 	}
 
-
 	@Override
 	public String toString() {
 		return "LieuDto [libelle=" + libelle + ", complement=" + complement + ", pays=" + pays + "]";
 	}
-	
 
 }

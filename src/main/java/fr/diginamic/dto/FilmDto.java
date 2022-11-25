@@ -4,18 +4,11 @@ import java.time.Year;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import fr.diginamic.entites.Acteur;
-import fr.diginamic.entites.Genre;
-import fr.diginamic.entites.Lieu;
-import fr.diginamic.entites.Pays;
-import fr.diginamic.entites.Realisateur;
-import fr.diginamic.entites.Role;
 import fr.diginamic.utils.YearDeserializer;
 
 public class FilmDto {

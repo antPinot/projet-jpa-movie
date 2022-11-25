@@ -16,12 +16,13 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
  * @author antPinot
  *
  */
+@SuppressWarnings("serial")
 public class LocalDateDeserializer extends StdDeserializer<LocalDate> {
-	
+
 	protected LocalDateDeserializer() {
 		super(LocalDate.class);
 	}
-	
+
 	@Override
 	public LocalDate deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
 		String stringDateNaissance = p.readValueAs(String.class);

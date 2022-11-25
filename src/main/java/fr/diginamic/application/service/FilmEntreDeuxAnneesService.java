@@ -3,13 +3,12 @@
  */
 package fr.diginamic.application.service;
 
-import java.time.Year;
 import java.util.List;
 import java.util.Scanner;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 
+import fr.diginamic.dao.FilmDao;
 import fr.diginamic.entites.Film;
 
 /**
@@ -21,6 +20,8 @@ public class FilmEntreDeuxAnneesService extends MenuService {
 	@Override
 	public void TraitementService(Scanner scanner, EntityManager em) {
 
+		FilmDao filmDao = new FilmDao(em);
+
 		System.out.println("Veuillez saisir la première année");
 		String saisiePremiereAnnee = scanner.nextLine();
 		System.out.println("Veuillez saisir la seconde année");
@@ -28,13 +29,9 @@ public class FilmEntreDeuxAnneesService extends MenuService {
 
 		// Films sortis entre 2 années données
 
-		TypedQuery<Film> queryFilmEntreAnnees = em
-				.createQuery("SELECT f FROM Film f WHERE f.anneeSortie BETWEEN :saisiePremiereAnnee AND :saisieSecondeAnnee", Film.class);
-		queryFilmEntreAnnees.setParameter("saisiePremiereAnnee", Year.parse(saisiePremiereAnnee));
-		queryFilmEntreAnnees.setParameter("saisieSecondeAnnee", Year.parse(saisieSecondeAnnee));
-		List<Film> queryFilmographieResult = queryFilmEntreAnnees.getResultList();
+		List<Film> filmEntreDeuxAnnees = filmDao.getFilmsEntreDeuxAnnees(saisiePremiereAnnee, saisieSecondeAnnee);
 
-		for (Film films : queryFilmographieResult) {
+		for (Film films : filmEntreDeuxAnnees) {
 			System.out.println(films.getNom());
 		}
 

@@ -15,6 +15,8 @@ import javax.persistence.EntityManager;
  */
 public abstract class MenuService {
 	
+	protected EntityManager em;
+	
 	/**
 	 * Méthode abstraite de traitement que doivent posséder toutes les classes filles de service
 	 * 
