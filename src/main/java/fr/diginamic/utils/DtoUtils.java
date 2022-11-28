@@ -3,7 +3,6 @@
  */
 package fr.diginamic.utils;
 
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,7 +28,6 @@ import fr.diginamic.entites.Role;
  */
 public class DtoUtils {
 
-	
 	/**
 	 * Méthode pour construire un Pays à partir des attributs du PaysDto
 	 * 
@@ -43,7 +41,7 @@ public class DtoUtils {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Méthode pour construire un Lieu à partir des attributs du LieuDto
 	 * 
@@ -63,27 +61,27 @@ public class DtoUtils {
 	 * Méthode pour construire un Genre à partir des attributs du GenreDto
 	 * 
 	 * @param genreToConvert le GenreDto à convertir en entité
-	 * @return convertedGenre le genre converti 
+	 * @return convertedGenre le genre converti
 	 */
 	public static Genre genreDtoToGenre(GenreDto genreToConvert) {
 		Genre convertedGenre = new Genre(genreToConvert.getLibelle());
 		return convertedGenre;
 	}
-	
+
 	/**
 	 * Méthode pour construire un Acteur à partir des attributs de l'ActeurDto
 	 * 
 	 * @param acteurToConvert l'ActeurDto à convertir en entité
-	 * @return convertedActeur l'Acteur converti 
+	 * @return convertedActeur l'Acteur converti
 	 */
 	public static Acteur acteurDtoToActeur(ActeurDto acteurToConvert) {
 		Acteur convertedActeur = new Acteur(acteurToConvert.getIdentite(), acteurToConvert.getUrl(),
-				acteurToConvert.getIdImdb(), acteurToConvert.getHeight(), acteurToConvert.getDateNaissance(),lieuDtoToLieu(acteurToConvert.getLieuNaissance()));
+				acteurToConvert.getIdImdb(), acteurToConvert.getHeight(), acteurToConvert.getDateNaissance(),
+				lieuDtoToLieu(acteurToConvert.getLieuNaissance()));
 		return convertedActeur;
 
 	}
 
-	
 	/**
 	 * Méthode pour construire un Role à partir des attributs de RoleDto
 	 * 
@@ -97,26 +95,27 @@ public class DtoUtils {
 		convertedRole.getFilms().add(new Film(roleToConvert.getFilm()));
 		return convertedRole;
 	}
-	
-	
+
 	/**
-	 * Méthode pour construire un réalisateur à partir des attributs de RealisateurDto
+	 * Méthode pour construire un réalisateur à partir des attributs de
+	 * RealisateurDto
 	 * 
 	 * @param realisateurToConvert le RealisateurDto à convertir en entité
 	 * @return convertedRealisateur le Realisateur converti
 	 */
-	public static Realisateur realisateurDtoToRealisateur(RealisateurDto realisateurToConvert){
-		Realisateur convertedRealisateur = new Realisateur(realisateurToConvert.getIdentite(), realisateurToConvert.getUrl());
+	public static Realisateur realisateurDtoToRealisateur(RealisateurDto realisateurToConvert) {
+		Realisateur convertedRealisateur = new Realisateur(realisateurToConvert.getIdentite(),
+				realisateurToConvert.getUrl());
 		return convertedRealisateur;
 	}
-	
+
 	/**
-	 * Méthode pour construire un Genre à partir des attributs du GenreDto
+	 * Méthode pour construire un set de Role à partir d'un set de RoleDto
 	 * 
-	 * @param genreToConvert le GenreDto à convertir en entité
-	 * @return convertedGenre le genre converti 
+	 * @param roleListToConvert Le Set de RoleDto à convertir
+	 * @return convertedRoleList Le Set de Role converti
 	 */
-	public static Set<Role> roleDtoListToRoleList(Set<RoleDto> roleListToConvert){
+	public static Set<Role> roleDtoListToRoleList(Set<RoleDto> roleListToConvert) {
 		Set<Role> convertedRoleList = new HashSet<Role>();
 		for (RoleDto roles : roleListToConvert) {
 			convertedRoleList.add(roleDtoToRole(roles));
@@ -124,6 +123,12 @@ public class DtoUtils {
 		return convertedRoleList;
 	}
 
+	/**
+	 * Méthode pour construire un set de Genre à partir d'un set de GenreDto
+	 * 
+	 * @param genreListToConvert Le Set de GenreDto à convertir
+	 * @return convertedGenreList Le Set de Genre converti
+	 */
 	public static Set<Genre> genreDtoListToGenreList(Set<GenreDto> genreListToConvert) {
 		Set<Genre> convertedGenreList = new HashSet<Genre>();
 		for (GenreDto genres : genreListToConvert) {
@@ -131,16 +136,29 @@ public class DtoUtils {
 		}
 		return convertedGenreList;
 	}
-	
-	public static Set<Acteur> acteurDtoListToActeurList(Set<ActeurDto> acteurListToConvert){
+
+	/**
+	 * Méthode pour construire un set de Acteur à partir d'un set de ActeurDto
+	 * 
+	 * @param acteurListToConvert Le Set de ActeurDto à convertir
+	 * @return convertedActeurList Le Set de Acteur converti
+	 */
+	public static Set<Acteur> acteurDtoListToActeurList(Set<ActeurDto> acteurListToConvert) {
 		Set<Acteur> convertedActeurList = new HashSet<Acteur>();
 		for (ActeurDto acteurs : acteurListToConvert) {
 			convertedActeurList.add(acteurDtoToActeur(acteurs));
 		}
 		return convertedActeurList;
 	}
-	
-	public static Set<Realisateur> realisateurDtoListToRealisateurList(Set<RealisateurDto> realisateurListToConvert){
+
+	/**
+	 * Méthode pour construire un set de Realisateur à partir d'un set de
+	 * RealisateurDto
+	 * 
+	 * @param realisateurListToConvert
+	 * @return convertedRealisateurList
+	 */
+	public static Set<Realisateur> realisateurDtoListToRealisateurList(Set<RealisateurDto> realisateurListToConvert) {
 		Set<Realisateur> convertedRealisateurList = new HashSet<Realisateur>();
 		for (RealisateurDto realisateurs : realisateurListToConvert) {
 			convertedRealisateurList.add(realisateurDtoToRealisateur(realisateurs));

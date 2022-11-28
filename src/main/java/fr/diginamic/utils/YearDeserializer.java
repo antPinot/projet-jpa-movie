@@ -9,6 +9,12 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
+/**
+ * Classe fournissant une méthode de déserialisation d'une String en Year
+ * 
+ * @author antPinot
+ *
+ */
 @SuppressWarnings("serial")
 public class YearDeserializer extends StdDeserializer<Year> {
 	

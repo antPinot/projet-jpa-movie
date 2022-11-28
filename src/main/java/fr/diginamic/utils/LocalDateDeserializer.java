@@ -13,12 +13,20 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 /**
+ * Classe fournissant une méthode de déserialisation d'une String en LocalDate
+ * <p> 
+ * Note de l'auteur : Vu l'utilité de cette méthode dans ce code, on pourrait la classer
+ * dans un package inutils
+ * 
  * @author antPinot
  *
  */
 @SuppressWarnings("serial")
 public class LocalDateDeserializer extends StdDeserializer<LocalDate> {
 
+	/**Constructeur
+	 * 
+	 */
 	protected LocalDateDeserializer() {
 		super(LocalDate.class);
 	}
