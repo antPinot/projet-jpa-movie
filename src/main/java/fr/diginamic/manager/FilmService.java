@@ -9,11 +9,15 @@ import fr.diginamic.dao.FilmDao;
 import fr.diginamic.entites.Film;
 
 /**
+ * 
+ * Classe de service qui fournit des méthodes de traitement des films
+ * 
  * @author antPinot
  *
  */
 public class FilmService {
 
+	/** filmDao */
 	private FilmDao filmDao;
 
 	/**
@@ -25,6 +29,12 @@ public class FilmService {
 		this.filmDao = new FilmDao(em);
 	}
 
+	/**
+	 * Méthode qui insère un film s'il n'existe pas en base de données
+	 * ou référence le film s'il existe
+	 * 
+	 * @param film
+	 */
 	public void selectOrCreate(Film film) {
 		Film query = filmDao.getFilmByNom(film.getNom());
 		if (query == null) {

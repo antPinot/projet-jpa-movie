@@ -13,11 +13,14 @@ import fr.diginamic.dao.RoleDao;
 import fr.diginamic.entites.Role;
 
 /**
+ * Classe de service qui fournit des méthodes de traitement des rôles
+ * 
  * @author antPinot
  *
  */
 public class RoleService {
 
+	/** roleDao */
 	private RoleDao roleDao;
 
 	/**
@@ -29,6 +32,12 @@ public class RoleService {
 		this.roleDao = new RoleDao(em);
 	}
 
+	/**
+	 * Méthode qui insère un rôle s'il n'existe pas en base de données
+	 * ou référence le rôle s'il existe
+	 * 
+	 * @param role
+	 */
 	public void selectOrCreate(Role role) {
 		Role query = roleDao.getRoleByCharacterName(role.getCharacterName(),
 				role.getActeurs().iterator().next().getIdentite());
@@ -39,6 +48,11 @@ public class RoleService {
 		}
 	}
 
+	/**
+	 * Méthode pour supprimer les doublons de réalisateurs dans un film
+	 * 
+	 * @param roles
+	 */
 	public static void removeDoublonsRole(Set<Role> roles) {
 		HashMap<String, Role> gestionDoublons = new HashMap<String, Role>();
 		Set<Role> doublonsToRemove = new HashSet<Role>();

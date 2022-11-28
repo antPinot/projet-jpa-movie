@@ -13,11 +13,14 @@ import fr.diginamic.dao.RealisateurDao;
 import fr.diginamic.entites.Realisateur;
 
 /**
+ * Classe de service qui fournit des méthodes de traitement des réalisateurs
+ * 
  * @author antPinot
  *
  */
 public class RealisateurService {
 
+	/** realisateurDao */
 	private RealisateurDao realisateurDao;
 
 	/**
@@ -29,6 +32,12 @@ public class RealisateurService {
 		this.realisateurDao = new RealisateurDao(em);
 	}
 
+	/**
+	 * Méthode qui insère un réalisateur s'il n'existe pas en base de données
+	 * ou référence le réalisateur s'il existe
+	 * 
+	 * @param realisateur
+	 */
 	public void selectOrCreate(Realisateur realisateur) {
 		Realisateur query = realisateurDao.getRealisateurByIdentite(realisateur.getIdentite());
 		if (query == null) {
@@ -38,6 +47,11 @@ public class RealisateurService {
 		}
 	}
 
+	/**
+	 * Méthode pour supprimer les doublons de réalisateurs dans un film
+	 * 
+	 * @param realisateurs
+	 */
 	public static void removeDoublonsRealisateurs(Set<Realisateur> realisateurs) {
 		HashMap<String, Realisateur> gestionDoublons = new HashMap<String, Realisateur>();
 		Set<Realisateur> doublonsToRemove = new HashSet<Realisateur>();

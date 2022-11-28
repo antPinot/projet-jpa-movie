@@ -13,11 +13,15 @@ import fr.diginamic.dao.GenreDao;
 import fr.diginamic.entites.Genre;
 
 /**
+ * 
+ * Classe de service qui fournit des méthodes de traitement des genres
+ * 
  * @author antPinot
  *
  */
 public class GenreService {
 
+	/** genreDao */
 	private GenreDao genreDao;
 
 	/**
@@ -29,6 +33,12 @@ public class GenreService {
 		this.genreDao = new GenreDao(em);
 	}
 
+	/**
+	 * Méthode qui insère un genre s'il n'existe pas en base de données
+	 * ou référence le genre s'il existe
+	 * 
+	 * @param genre
+	 */
 	public void selectOrCreate(Genre genre) {
 		Genre query = genreDao.getGenreByLibelle(genre.getLibelle());
 		if (query == null) {
@@ -38,6 +48,11 @@ public class GenreService {
 		}
 	}
 
+	/**
+	 * Méthode pour supprimer les doublons de genres dans un film
+	 * 
+	 * @param genres
+	 */
 	public static void removeDoublonsGenre(Set<Genre> genres) {
 		HashMap<String, Genre> gestionDoublons = new HashMap<String, Genre>();
 		Set<Genre> doublonsToRemove = new HashSet<Genre>();

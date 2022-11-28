@@ -13,11 +13,14 @@ import fr.diginamic.dao.ActeurDao;
 import fr.diginamic.entites.Acteur;
 
 /**
+ * Classe de service qui fournit des méthodes de traitement des acteurs
+ * 
  * @author antPinot
  *
  */
 public class ActeurService {
 	
+	/** acteurDao */
 	private ActeurDao acteurDao;
 
 	/**Constructeur
@@ -27,6 +30,12 @@ public class ActeurService {
 		this.acteurDao = new ActeurDao(em);
 	}
 	
+	/**
+	 * Méthode qui insère un acteur s'il n'existe pas en base de données
+	 * ou référence l'acteur s'il existe
+	 * 
+	 * @param acteur
+	 */
 	public void selectOrCreate(Acteur acteur) {
 		Acteur query = acteurDao.getActeurByIdentite(acteur.getIdentite());
 		if (query == null) {
@@ -36,6 +45,11 @@ public class ActeurService {
 		}
 	}
 	
+	/**
+	 * Méthode pour supprimer les doublons d'acteurs dans un film
+	 * 
+	 * @param acteurs
+	 */
 	public static void removeDoublonsActeur(Set<Acteur> acteurs) {
 		HashMap<String, Acteur> gestionDoublons = new HashMap<String, Acteur>();
 		Set<Acteur> doublonsToRemove = new HashSet<Acteur>();

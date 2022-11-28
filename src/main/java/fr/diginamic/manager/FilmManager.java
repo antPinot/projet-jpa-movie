@@ -15,27 +15,38 @@ import fr.diginamic.entites.Realisateur;
 import fr.diginamic.entites.Role;
 
 /**
+ * Classe qui gère la persistance d'un film et de ses attributs en base de données
+ * 
  * @author antPinot
  *
  */
 public class FilmManager {
 
+	/** em */
 	private EntityManager em;
 	
+	/** filmService */
 	private FilmService filmService;
 
+	/** acteurService */
 	private ActeurService acteurService;
 
+	/** genreService */
 	private GenreService genreService;
 
+	/** lieuService */
 	private LieuService lieuService;
 
+	/** paysService */
 	private PaysService paysService;
 
+	/** realisateurService */
 	private RealisateurService realisateurService;
 
+	/** roleService */
 	private RoleService roleService;
 
+	
 	/**
 	 * Constructeur
 	 * 
@@ -55,6 +66,11 @@ public class FilmManager {
 
 	}
 
+	/**
+	 * Méthode de traitement d'un film qui gère la persistance du film et de ses attributs
+	 * 
+	 * @param film
+	 */
 	public void traiteFilm(Film film) {
 
 		EntityTransaction transaction = em.getTransaction();
