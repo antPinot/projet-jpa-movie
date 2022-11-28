@@ -13,10 +13,23 @@ import fr.diginamic.application.service.FilmographieEntreDeuxAnneesService;
 import fr.diginamic.application.service.FilmographieService;
 import fr.diginamic.application.service.FilmsCommunsDeuxActeursService;
 
+/**
+ * Application qui fournit un menu et des services de recherche
+ * dans la base de données projet_jpa_movie
+ * 
+ * @author antPinot
+ *
+ */
 public class ApplicationRecherche {
 
+	/**
+	 * Méthode main de l'application
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
+		// Initialisation du scanner pour gérer la saisie de l'utilisateur
 		Scanner scanner = new Scanner(System.in);
 
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("projet-jpa-movie");
@@ -68,6 +81,10 @@ public class ApplicationRecherche {
 		}
 	}
 
+	/**
+	 * Méthode d'affichage du menu de recherche
+	 * 
+	 */
 	private static void afficherMenu() {
 		System.out.println("***** Rechercher une donnée après avoir parsé le pire JSON de l'histoire *****");
 		System.out.println("1. Afficher la filmographie d'un acteur donné");

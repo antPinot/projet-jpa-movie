@@ -14,12 +14,18 @@ import fr.diginamic.manager.FilmManager;
 import fr.diginamic.utils.InternetMovieDatabase;
 
 /**
+ * Application qui permet l'insertion en base de données de la totalité des films
+ * parsés depuis le fichier JSON
+ * 
  * @author antPinot
  *
  */
 public class IntegrationApp {
 
 	/**
+	 * Méthode main de l'application
+	 * Crée un objet InternetMovieDatabase 
+	 * 
 	 * @param args
 	 * @throws IOException
 	 * @throws DatabindException
