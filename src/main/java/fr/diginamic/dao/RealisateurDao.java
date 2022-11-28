@@ -11,11 +11,14 @@ import javax.persistence.TypedQuery;
 import fr.diginamic.entites.Realisateur;
 
 /**
+ * Classe d'accès à la base de données pour l'object Realisateur
+ * 
  * @author antPinot
  *
  */
 public class RealisateurDao {
 
+	/** em EntityManager pour les opérations avec la base de données*/
 	private EntityManager em;
 
 	/**
@@ -27,6 +30,12 @@ public class RealisateurDao {
 		this.em = em;
 	}
 
+	/**
+	 * Méthode qui recherche un réalisateur par son identité
+	 * 
+	 * @param identite 
+	 * @return le résultat de la requête s'il existe ou null si la requête n'a pas abouti à un résultat
+	 */
 	public Realisateur getRealisateurByIdentite(String identite) {
 		TypedQuery<Realisateur> queryRealisateur = em
 				.createQuery("SELECT real FROM Realisateur real WHERE real.identite = :param1", Realisateur.class);
@@ -40,6 +49,11 @@ public class RealisateurDao {
 		}
 	}
 	
+	/**
+	 * Gère la persistance du réalisateur
+	 * 
+	 * @param realisateur
+	 */
 	public void insert (Realisateur realisateur) {
 		em.persist(realisateur);
 	}

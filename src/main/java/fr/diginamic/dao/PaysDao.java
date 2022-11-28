@@ -11,11 +11,14 @@ import javax.persistence.TypedQuery;
 import fr.diginamic.entites.Pays;
 
 /**
+ * Classe d'accès à la base de données pour l'object Lieu
+ * 
  * @author antPinot
  *
  */
 public class PaysDao {
 
+	/** em EntityManager pour les opérations avec la base de données*/
 	private EntityManager em;
 
 	/**
@@ -27,6 +30,12 @@ public class PaysDao {
 		this.em = em;
 	}
 
+	/**
+	 * Méthode qui recherche un pays par son nom
+	 * 
+	 * @param nom
+	 * @return le résultat de la requête s'il existe ou null si la requête n'a pas abouti à un résultat
+	 */
 	public Pays getPaysByNom(String nom) {
 		TypedQuery<Pays> queryPays = em.createQuery("SELECT p FROM Pays p WHERE p.nom = :param1", Pays.class);
 		queryPays.setParameter("param1", nom);
@@ -39,6 +48,11 @@ public class PaysDao {
 		}
 	}
 
+	/**
+	 * Gère la persistance du pays
+	 * 
+	 * @param pays
+	 */
 	public void insert(Pays pays) {
 		em.persist(pays);
 	}

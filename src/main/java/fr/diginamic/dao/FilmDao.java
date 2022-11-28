@@ -12,11 +12,14 @@ import javax.persistence.TypedQuery;
 import fr.diginamic.entites.Film;
 
 /**
+ * Classe d'accès à la base de données pour l'object Film
+ * 
  * @author antPinot
  *
  */
 public class FilmDao {
 
+	/** em EntityManager pour les opérations avec la base de données*/
 	private EntityManager em;
 
 	/**
@@ -28,6 +31,12 @@ public class FilmDao {
 		this.em = em;
 	}
 
+	/**
+	 * Méthode qui recherche un film via son nom
+	 * 
+	 * @param nom du film
+	 * @return le résultat de la requête s'il existe ou null si la requête n'a pas abouti à un résultat
+	 */
 	public Film getFilmByNom(String nom) {
 		TypedQuery<Film> queryFilm = em.createQuery("SELECT f FROM Film f WHERE f.nom = :param1", Film.class);
 		queryFilm.setParameter("param1", nom);
@@ -40,6 +49,12 @@ public class FilmDao {
 		}
 	}
 
+	/**
+	 * Méthode qui recherche la filmographie d'un acteur donné
+	 * 
+	 * @param saisieActeur Acteur saisi par l'utilisateur
+	 * @return queryFilmographieResult la filmographie
+	 */
 	public List<Film> getFilmographie(String saisieActeur) {
 		TypedQuery<Film> queryFilmographie = em
 				.createQuery("SELECT f FROM Film f JOIN f.acteurs a WHERE a.identite = :saisieActeur", Film.class);
@@ -49,6 +64,13 @@ public class FilmDao {
 		return queryFilmographieResult;
 	}
 
+	/**
+	 * Méthode qui recherche la liste des films sorties entre deux années données
+	 * 
+	 * @param saisiePremiereAnnee premiere borne saisie par l'utilisateur
+	 * @param saisieSecondeAnnee seconde borne saisie par l'utilisateur
+	 * @return queryFilmEntreDeuxAnneesResult liste des films entre deux annees
+	 */
 	public List<Film> getFilmsEntreDeuxAnnees(String saisiePremiereAnnee, String saisieSecondeAnnee) {
 		TypedQuery<Film> queryFilmEntreAnnees = em.createQuery(
 				"SELECT f FROM Film f WHERE f.anneeSortie BETWEEN :saisiePremiereAnnee AND :saisieSecondeAnnee",
@@ -60,6 +82,14 @@ public class FilmDao {
 		return queryFilmEntreDeuxAnneesResult;
 	}
 	
+	/**
+	 * Méthode qui recherche la filmographie d'un acteur entre deux années données
+	 * 
+	 * @param saisiePremiereAnnee premiere borne saisie par l'utilisateur
+	 * @param saisieSecondeAnnee seconde borne saisie par l'utilisateur
+	 * @param saisieActeur Acteur saisi par l'utilisateur
+	 * @return queryFilmographieAnneeActeur filmographie entre deux années
+	 */
 	public List<Film> getFilmsEntreDeuxAnneesActeur (String saisiePremiereAnnee, String saisieSecondeAnnee, String saisieActeur){
 		TypedQuery<Film> queryFilmEntreAnneesAvecActeur = em.createQuery(
 				"SELECT f FROM Film f JOIN f.acteurs a WHERE a.identite = :saisieActeur AND f.anneeSortie BETWEEN :saisiePremiereAnnee AND :saisieSecondeAnnee",
@@ -72,6 +102,11 @@ public class FilmDao {
 		return queryFilmographieAnneeActeur;
 	}
 
+	/**
+	 * Gère la persistance du film
+	 * 
+	 * @param film
+	 */
 	public void insert(Film film) {
 		em.persist(film);
 	}

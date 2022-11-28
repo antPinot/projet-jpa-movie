@@ -11,11 +11,14 @@ import javax.persistence.TypedQuery;
 import fr.diginamic.entites.Acteur;
 
 /**
+ * Classe d'accès à la base de données pour l'object Acteur
+ * 
  * @author antPinot
  *
  */
 public class ActeurDao {
 
+	/** em EntityManager pour les opérations avec la base de données*/
 	private EntityManager em;
 
 	/**
@@ -27,6 +30,12 @@ public class ActeurDao {
 		this.em = em;
 	}
 
+	/**
+	 * Méthode qui recherche un acteur via son identité
+	 * 
+	 * @param identite de l'acteur
+	 * @return le résultat de la requête s'il existe ou null si la requête n'a pas abouti à un résultat
+	 */
 	public Acteur getActeurByIdentite(String identite) {
 		TypedQuery<Acteur> queryActeur = em.createQuery("SELECT a FROM Acteur a WHERE a.identite = :param1",
 				Acteur.class);
@@ -40,6 +49,12 @@ public class ActeurDao {
 		}
 	}
 	
+	/**
+	 * Méthode qui recherche le casting principal d'un film donné
+	 * 
+	 * @param saisieFilm Film saisi par l'utilisateur
+	 * @return queryCastingResult le casting principal
+	 */
 	public List<Acteur> getCasting(String saisieFilm){
 		TypedQuery<Acteur> queryCasting = em.createQuery("SELECT a FROM Acteur a JOIN a.films f WHERE f.nom = :saisieFilm",
 				Acteur.class);
@@ -50,6 +65,11 @@ public class ActeurDao {
 		
 	}
 
+	/**
+	 * Gère la persistance de l'acteur
+	 * 
+	 * @param acteur
+	 */
 	public void insert(Acteur acteur) {
 		em.persist(acteur);
 	}

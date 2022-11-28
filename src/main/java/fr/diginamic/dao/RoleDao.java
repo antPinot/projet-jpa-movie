@@ -11,11 +11,14 @@ import javax.persistence.TypedQuery;
 import fr.diginamic.entites.Role;
 
 /**
+ * Classe d'accès à la base de données pour l'object Role
+ * 
  * @author antPinot
  *
  */
 public class RoleDao {
 
+	/** em EntityManager pour les opérations avec la base de données*/
 	private EntityManager em;
 
 	/**
@@ -27,6 +30,13 @@ public class RoleDao {
 		this.em = em;
 	}
 
+	/**
+	 * Méthode qui recherche un rôle par le nom du personnage et l'acteur qui joue le rôle
+	 * 
+	 * @param characterName
+	 * @param acteur
+	 * @return le résultat de la requête s'il existe ou null si la requête n'a pas abouti à un résultat
+	 */
 	public Role getRoleByCharacterName(String characterName, String acteur) {
 		TypedQuery<Role> queryRole = em.createQuery(
 				"SELECT r FROM Role r JOIN r.acteurs a WHERE r.characterName = :param1 AND a.identite = :param2",
@@ -42,6 +52,11 @@ public class RoleDao {
 		}
 	}
 
+	/**
+	 * Gère la persistance du rôle
+	 * 
+	 * @param role
+	 */
 	public void insert(Role role) {
 		em.persist(role);
 	}
