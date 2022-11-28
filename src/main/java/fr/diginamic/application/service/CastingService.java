@@ -12,6 +12,9 @@ import fr.diginamic.dao.ActeurDao;
 import fr.diginamic.entites.Acteur;
 
 /**
+ * Classe qui utilise un ActeurDao pour rechercher
+ * le casting d'un film
+ * 
  * @author antPinot
  *
  */

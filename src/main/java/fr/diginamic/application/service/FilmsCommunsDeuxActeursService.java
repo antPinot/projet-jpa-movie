@@ -12,6 +12,9 @@ import fr.diginamic.dao.FilmDao;
 import fr.diginamic.entites.Film;
 
 /**
+ * Classe qui utilise un FilmDao pour rechercher
+ * la filmographie commune de deux acteurs
+ * 
  * @author antPinot
  *
  */

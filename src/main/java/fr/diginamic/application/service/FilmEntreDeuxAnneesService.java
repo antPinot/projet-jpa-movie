@@ -12,6 +12,10 @@ import fr.diginamic.dao.FilmDao;
 import fr.diginamic.entites.Film;
 
 /**
+ * 
+ * Classe qui utilise un FilmDao pour rechercher
+ * la liste des films sortis entre deux années
+ * 
  * @author antPinot
  *
  */
