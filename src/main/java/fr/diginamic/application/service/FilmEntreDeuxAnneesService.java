@@ -34,10 +34,15 @@ public class FilmEntreDeuxAnneesService extends MenuService {
 		// Films sortis entre 2 années données
 
 		List<Film> filmEntreDeuxAnnees = filmDao.getFilmsEntreDeuxAnnees(saisiePremiereAnnee, saisieSecondeAnnee);
+		
+		int compteur = 0;
 
 		for (Film films : filmEntreDeuxAnnees) {
 			System.out.println(films.getNom());
+			compteur ++;
 		}
+		
+		System.out.println("Nb de films entre " + saisiePremiereAnnee + " et " + saisieSecondeAnnee + " : " + compteur);
 
 	}
 
