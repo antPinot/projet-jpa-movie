@@ -31,7 +31,7 @@ public class Genre {
 	private Integer id;
 
 	/** libelle */
-	@Column(name = "LIBELLE")
+	@Column(name = "LIBELLE", length = 50)
 	private String libelle;
 
 	/** films */

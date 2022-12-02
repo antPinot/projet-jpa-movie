@@ -35,11 +35,11 @@ public class Film {
 	private Integer id;
 
 	/** idImdb représente la clé métier de la base IMDB */
-	@Column(name = "ID_IMDB", nullable = false, unique = true)
+	@Column(name = "ID_IMDB", length = 15, nullable = false, unique = true)
 	private String idImdb;
 
 	/** nom du film */
-	@Column(name = "NOM")
+	@Column(name = "NOM", length = 180)
 	private String nom;
 
 	/** url sur le site imdb */
@@ -51,7 +51,7 @@ public class Film {
 	private String plot;
 
 	/** langue du film */
-	@Column(name = "LANGUE")
+	@Column(name = "LANGUE", length = 100)
 	private String langue;
 
 	/** année de sortie du film */

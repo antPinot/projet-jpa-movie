@@ -36,11 +36,11 @@ public class Lieu {
 	private Integer id;
 
 	/** libelle */
-	@Column(name = "LIBELLE")
+	@Column(name = "LIBELLE", length = 58)
 	private String libelle;
 
 	/** complement */
-	@Column(name = "COMPLEMENT")
+	@Column(name = "COMPLEMENT", length = 58)
 	private String complement;
 
 	/** pays */

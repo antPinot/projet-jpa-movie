@@ -33,7 +33,7 @@ public class Role {
 	private Integer id;
 	
 	/** nom du personnage */
-	@Column(name = "CHARACTER_NAME")
+	@Column(name = "CHARACTER_NAME", length = 255)
 	private String characterName;
 	
 	/** url */
@@ -41,7 +41,7 @@ public class Role {
 	private String url;
 	
 	/** height */
-	@Column(name = "HEIGHT")
+	@Column(name = "HEIGHT", length = 10)
 	private String height;
 	
 	/** films */

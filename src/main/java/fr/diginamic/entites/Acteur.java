@@ -33,7 +33,7 @@ public class Acteur extends Personne {
 	private String idImdb;
 
 	/** height */
-	@Column(name = "HEIGHT")
+	@Column(name = "HEIGHT", length = 10)
 	private String height;
 
 	/** dateNaissance */

@@ -32,7 +32,7 @@ public abstract class Personne {
 	protected Integer id;
 
 	/** identite */
-	@Column(name = "IDENTITE")
+	@Column(name = "IDENTITE", length = 98)
 	protected String identite;
 
 	/** url */

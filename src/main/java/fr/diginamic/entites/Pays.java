@@ -34,7 +34,7 @@ public class Pays {
 	private Integer id;
 
 	/** nom */
-	@Column(name = "NOM")
+	@Column(name = "NOM", length = 42)
 	private String nom;
 
 	/** url */
